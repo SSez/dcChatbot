@@ -40,3 +40,8 @@ python -c "import nltk;nltk.download('punkt')"
 -trainer 1024 128 0
 -trainer 1024 128 1
 ```
+
+### Ask questions
+```sh
+-ask how r you doing?
+```
