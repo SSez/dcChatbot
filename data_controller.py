@@ -78,17 +78,17 @@ def check_response(output):
     return countSQL
 
 def get_patterns(tag_id):
-    sql = "SELECT * FROM patterns WHERE tag_id = %s"
+    sql = "SELECT pattern FROM patterns WHERE tag_id = %s"
     adr = (int(tag_id),)
     db.conn.execute(sql, adr)
-    row = [x[2] for x in db.conn]
+    row = [x[0] for x in db.conn]
     return row
 
 def get_resonses(tag_id):
-    sql = "SELECT * FROM responses WHERE tag_id = %s"
+    sql = "SELECT response FROM responses WHERE tag_id = %s"
     adr = (int(tag_id),)
     db.conn.execute(sql, adr)
-    row = [x[2] for x in db.conn]
+    row = [x[0] for x in db.conn]
     return row
 
 def get_data():
