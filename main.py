@@ -247,7 +247,7 @@ def reply(msg, rcount, index_num, option):
                     bot_msg = random.choice(responses)
     else:
         bot_msg = ""
-    
+
     return bot_msg
 
 @client.command()
@@ -257,22 +257,22 @@ async def ask(ctx, *args):
     pred = ""
     first_msg = ""
     first_pred = ""
-    
+
     count_patters = -1
     count_responses = -1
     index_pattern = 0.70
     index_response = 0.00
-    
+
     auth_id = ctx.message.author.id
     auth_name = ctx.message.author.name
     bot_id = client.user.id
     check_auth_answer = False
-    
+
     success = True
     guess = ""
     check_answer = ""
     points = 0
-    
+
     id = str("")
     name = str("")
     mention = str("")
@@ -282,7 +282,7 @@ async def ask(ctx, *args):
         name = str(member.name)
         mention = str(member.mention)
         count_mentions += 1
-    
+
     output = ''
     count = 0
     for word in args:
@@ -290,12 +290,12 @@ async def ask(ctx, *args):
         output += ' '
         count += 1
     output = output[:-1]
-    
+
     if count_mentions > 0:
         output = output.replace('?', '').replace('!', '').replace(mention, ':replace_name:').replace(id, ':replace_name:').replace(name, ':replace_name:').replace('<', '').replace('@', '').replace('>', '')
     else:
         output = output.replace('?', '').replace('!', '').replace(',', '')
-    
+
     output = output.lower()
     output = " ".join(output.split())
     
@@ -306,17 +306,17 @@ async def ask(ctx, *args):
         if not bot_msg:
             success = False
         bot_msg = "I did not understand the question."
-    
+
     if ":replace_name:" in bot_msg:
         if count_mentions > 0:
             bot_msg = bot_msg.replace(':replace_name:', name)
         else:
             check_auth_answer = True
             bot_msg = bot_msg.replace(':replace_name:', auth_name)
-    
+
     answer = discord.Embed(title = str(bot_msg), colour = discord.Colour.blue() )
     first_msg = await ctx.channel.send( embed=answer )
-    
+
     if success == True:
         # Check response #
         check_answer = checkMentions(count_mentions, bot_msg, check_auth_answer, name, auth_name)
@@ -399,7 +399,7 @@ async def ask(ctx, *args):
                         
                         answer = discord.Embed(title = str(bot_msg), colour = discord.Colour.blue() )
                         msg = await ctx.channel.send( embed=answer )
-                        
+
                     askYN = discord.Embed(description = str("[{}%] Did this answer satisfy you? type: yes/no").format(probability), colour = discord.Colour.blue() )
                     pred = await ctx.channel.send( embed=askYN )
                     points += 5
